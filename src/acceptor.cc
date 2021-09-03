@@ -24,7 +24,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "header.cc"
 using namespace std;
 
 int return_ifn_error(int actual, int error_code, char const *error_msg);
