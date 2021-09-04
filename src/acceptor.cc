@@ -48,7 +48,8 @@ int main()
         printf("waiting a connection...\r\n");
         // -------------------------------------------------------------------------------------------------
         sockaddr_in remote_addr;
-        int connfd = return_ifn_error(accept(listenfd, (sockaddr *)&remote_addr, NULL), -1, "accept()");
+        unsigned int addr_len = sizeof(remote_addr);
+        int connfd = return_ifn_error(accept(listenfd, (sockaddr *)&remote_addr, &addr_len), -1, "accept()");
         printf("accept a connection:%s \r\n", inet_ntoa(remote_addr.sin_addr));
 
         int ret = recv(connfd, buff, 4096, 0);
@@ -71,7 +72,7 @@ int return_ifn_error(int actual, int error_code, char const *error_msg)
 {
     if (actual == error_code)
     {
-        printf("%s\r\n", error_msg);
+        printf("%s errer ...\r\n", error_msg);
         exit(0);
     }
     return actual;
