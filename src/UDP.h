@@ -9,12 +9,4 @@ public:
     ~UDP();
 };
 
-UDP::UDP()
-{
-}
-
-UDP::~UDP()
-{
-}
-
 #endif

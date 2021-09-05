@@ -6,7 +6,7 @@ int main()
 {
     try
     {
-        TCP *tcpSocket = SocketFactory::newTCPSocket();
+        TCP *tcpSocket = SocketFactory::newTCPServSocket();
         tcpSocket->listen();
         tcpSocket->start();
     }
