@@ -13,6 +13,7 @@ private:
 public:
     static TCP *newTCPServSocket();
     static TCP *newTCPServSocket(int port);
+    static UDP *newUDPServSocket();
     static UDP *newUDPServSocket(int port);
 };
 

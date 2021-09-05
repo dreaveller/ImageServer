@@ -6,6 +6,7 @@ class UDP
 private:
 public:
     UDP();
+    UDP(int port);
     ~UDP();
 };
 

@@ -4,6 +4,11 @@ UDP::UDP()
 {
 }
 
+UDP::UDP(int port)
+{
+    
+}
+
 UDP::~UDP()
 {
 }
