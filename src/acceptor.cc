@@ -24,6 +24,11 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <sys/sendfile.h>
+#include <fstream>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <string>
 using namespace std;
 
 int return_ifn_error(int actual, int error_code, char const *error_msg);
@@ -58,10 +63,39 @@ int main()
             printf("error");
             return 0;
         }
-        send(connfd, buff, 4096, 0);
+        // FILE *fp = fopen("85116637_p0.jpg", "rb");
+        // fseek(fp, 0, SEEK_END);
+        // int fsize = ftell(fp);
+        // fseek(fp, 0, SEEK_SET);
+
+        
+        string rmsg = "HTTP/1.1 200 OK\r\n";
+        rmsg += "Server: XHttp\r\n";
+        rmsg += "Content-Type: image/jpeg\r\n";
+        //rmsg+="Content-Type: image/gif\r\n";
+        // rmsg += "Content-Length: ";
+
+        //char bsize[128]={0};
+        //sprintf(bsize,"%d",filesize);
+
+        //rmsg+="10\r\n";
+        // rmsg += "11";
+        rmsg += "\r\n";
+        send(connfd, rmsg.c_str(), rmsg.size(), 0);
+
+        int fd = open("85116637_p0.jpg", O_RDONLY);
+        struct stat stat_buf;
+        fstat(fd, &stat_buf);
+        sendfile(connfd, fd, NULL, stat_buf.st_size);
+        // send(connfd, buff, 4096, 0);
         buff[ret] = '\0';
 
         printf("recv msg from client: %s\n", buff);
+
+
+        FILE *fp = fopen("text", "w");
+        fwrite(buff, ret, 1, fp);
+        fclose(fp);
         close(connfd);
         // -------------------------------------------------------------------------------------------------
     }
