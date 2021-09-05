@@ -1,4 +1,8 @@
+#ifndef _SOCKETFACTORY_
+#define _SOCKETFACTORY_
+
 #include "TCP.h"
+#include "UDP.h"
 
 class SocketFactory
 {
@@ -10,3 +14,5 @@ public:
     static TCP newTCPServSocket(int port);
     static UDP newUDPServSocket(int port);
 };
+
+#endif

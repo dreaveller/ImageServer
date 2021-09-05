@@ -1,3 +1,6 @@
+#ifndef _TCP_
+#define _TCP_
+
 class TCP
 {
 private:
@@ -11,3 +14,5 @@ public:
     int start();
     ~TCP();
 };
+
+#endif
