@@ -4,14 +4,16 @@
 
 int main()
 {
+    TCP *tcpSocket;
     try
     {
-        TCP *tcpSocket = SocketFactory::newTCPServSocket();
+        tcpSocket = SocketFactory::newTCPServSocket(26413);
         tcpSocket->listen();
         tcpSocket->start();
     }
     catch (int number)
     {
         printf("%d", number);
-    }
+        delete tcpSocket;
+    } 
 }

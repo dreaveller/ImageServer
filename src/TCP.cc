@@ -1,10 +1,10 @@
 #include "TCP.h"
-#include <sys/unistd.h>
+#include <unistd.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <stdio.h>
-
 
 TCP::TCP()
 {
@@ -17,7 +17,7 @@ TCP::TCP(int port)
     {
         throw 10001;
     }
-    
+
     this->socket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (this->socket == -1)
     {
@@ -46,17 +46,34 @@ int TCP::listen()
 
 int TCP::start()
 {
-    sockaddr_in remote_addr;
-    socklen_t addr_len = sizeof(remote_addr);
-    if (::accept(this->socket, (sockaddr *)&remote_addr, &addr_len) == -1)
+    while (1)
     {
-        printf("%s:%d accept() error\r\n", __FILE__, __LINE__);
-        throw 10005;
+        printf("waiting a connection...\r\n");
+        sockaddr_in remote_addr;
+        unsigned int addr_len = sizeof(remote_addr);
+        int connfd;
+        if ((connfd = ::accept(this->socket, (sockaddr *)&remote_addr, &addr_len)) == -1)
+        {
+            printf("%s:%d accept() error\r\n", __FILE__, __LINE__);
+            throw 10005;
+        }
+        printf("accept a connection:%s \r\n", inet_ntoa(remote_addr.sin_addr));
+        char buff[4096];
+        int ret = recv(connfd, buff, 4096, 0);
+        if (ret < 0)
+        {
+            printf("error\r\n");
+            return 0;
+        }
+        send(connfd, buff, 4096, 0);
+        buff[ret] = '\0';
+
+        printf("recv msg from client: %s\n", buff);
+        close(connfd);
+        // -------------------------------------------------------------------------------------------------
     }
-    
 }
 
 TCP::~TCP()
 {
-    
 }
