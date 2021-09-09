@@ -3,14 +3,20 @@
 
 struct HTTPRequest
 {
-    /* data */
+    char *method;
+    char *url;
+    char *version;
+
+    char *body;
 };
 
 struct HTTPResponse
 {
-    /* data */
+    char *version;
+    char *status;
+    char *comment;
+
+    char *body;
 };
-
-
 
 #endif
