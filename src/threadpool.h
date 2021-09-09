@@ -1,3 +1,25 @@
+/***********************************************************************************************
+ *** Threadpool                                                                              ***
+ ***********************************************************************************************
+ *                                                                                             *
+ *                 Project Name : ImageServer                                                  *
+ *                                                                                             *
+ *                    File Name : acceptor.cc                                                  *
+ *                                                                                             *
+ *                   Programmer : yunru                                                        *
+ *                                                                                             *
+ *                   Start Date : Sep 10, 2021                                                 *
+ *                                                                                             *
+ *                  Last Update : Sep 10, 2021 [yunru]                                         *
+ *                                                                                             *
+ *---------------------------------------------------------------------------------------------*
+ * Functions:                                                                                  *
+ *   commit:: commit a task waiting to be execute                                              *
+ *   idlCount: get the count of the idel thread                                                *
+ *   thrCount: get the count of the thread                                                     *
+ *   addThread: add a thread on the threadpool instance                                        *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
 #ifndef THREAD_POOL_H
 #define THREAD_POOL_H
 
@@ -63,6 +85,7 @@ namespace std
                     (*task)();
                 });
             }
+
 #ifdef THREADPOOL_AUTO_GROW
             if (_idlThrNum < 1 && _pool.size() < THREADPOOL_MAX_NUM)
                 addThread(1);
