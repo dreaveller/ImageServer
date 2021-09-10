@@ -67,7 +67,7 @@ namespace std
         // 提交一个任务
         // 调用.get()获取返回值会等待任务执行完,获取返回值
         // 有两种方法可以实现调用类成员，
-        // 一种是使用   bind： .commit(std::bind(&Dog::sayHello, &dog));
+        // 一种是用   bind： .commit(std::bind(&Dog::sayHello, &dog));
         // 一种是用   mem_fn： .commit(std::mem_fn(&Dog::sayHello), this)
         template <class F, class... Args>
         auto commit(F &&f, Args &&...args) -> future<decltype(f(args...))>
@@ -79,34 +79,30 @@ namespace std
             auto task = make_shared<packaged_task<RetType()>>(std::bind(forward<F>(f), forward<Args>(args)...)); // 把函数入口及参数,打包(绑定)
             future<RetType> future = task->get_future();
 
-            {                                  // 添加任务到队列
-                lock_guard<mutex> lock{_lock}; //对当前块的语句加锁  lock_guard 是 mutex 的 stack 封装类，构造的时候 lock()，析构的时候 unlock()
-                _tasks.emplace([task]() {      // push(Task{...}) 放到队列后面
-                    (*task)();
-                });
+            {
+                lock_guard<mutex> lock{_lock};               //对当前块的语句加锁  lock_guard 是 mutex 的 stack 封装类，构造的时候 lock()，析构的时候 unlock()
+                _tasks.emplace([task]() { (*task)(); });     // push(Task{...}) 放到队列后面
             }
 
 #ifdef THREADPOOL_AUTO_GROW
             if (_idlThrNum < 1 && _pool.size() < THREADPOOL_MAX_NUM)
                 addThread(1);
-#endif                             // !THREADPOOL_AUTO_GROW
+#endif
             _task_cv.notify_one(); // 唤醒一个线程执行
 
             return future;
         }
 
-        //空闲线程数量
         int idlCount() { return _idlThrNum; }
-        //线程数量
         int thrCount() { return _pool.size(); }
+
 #ifndef THREADPOOL_AUTO_GROW
     private:
-#endif // !THREADPOOL_AUTO_GROW \
-    //添加指定数量的线程
+#endif
         void addThread(unsigned short size)
         {
             for (; _pool.size() < THREADPOOL_MAX_NUM && size > 0; --size)
-            {                               //增加线程数量,但不超过 预定义数量 THREADPOOL_MAX_NUM
+            {
                 _pool.emplace_back([this] { //工作线程函数
                     while (_run)
                     {
