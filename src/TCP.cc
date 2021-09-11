@@ -1,10 +1,13 @@
-#include "TCP.h"
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <stdio.h>
+#include "TCP.h"
+#include "ThreadPool.h"
+#include "Action.h"
+#include "HTTPEntity.h"
 
 TCP::TCP()
 {
@@ -58,18 +61,20 @@ int TCP::start()
             throw 10005;
         }
         printf("accept a connection:%s \r\n", inet_ntoa(remote_addr.sin_addr));
-        char buff[4096];
-        int ret = recv(connfd, buff, 4096, 0);
-        if (ret < 0)
-        {
-            printf("error\r\n");
-            return 0;
-        }
-        send(connfd, buff, 4096, 0);
-        buff[ret] = '\0';
+        // char buff[4096];
+        // int ret = recv(connfd, buff, 4096, 0);
+        // if (ret < 0)
+        // {
+        //     printf("error\r\n");
+        //     return 0;
+        // }
+        // send(connfd, buff, 4096, 0);
+        // buff[ret] = '\0';
 
-        printf("recv msg from client: %s\n", buff);
-        close(connfd);
+        // printf("recv msg from client: %s\n", buff);
+        // close(connfd);
+        HTTPResponse hTTPResponse;
+        executor.commit(sendRandomImage, connfd, hTTPResponse);
         // -------------------------------------------------------------------------------------------------
     }
 }

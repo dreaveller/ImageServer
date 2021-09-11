@@ -22,22 +22,22 @@ void sub(int a, int b)
 
 int main()
 {
-    // TCP *tcpSocket;
-    // try
-    // {
-    //     tcpSocket = SocketFactory::newTCPServSocket(26413);
-    //     tcpSocket->listen();
-    //     tcpSocket->start();
-    // }
-    // catch (int number)
-    // {
-    //     printf("%d", number);
-    //     delete tcpSocket;
-    // } 
+    TCP *tcpSocket;
+    try
+    {
+        tcpSocket = SocketFactory::newTCPServSocket(26413);
+        tcpSocket->listen();
+        tcpSocket->start();
+    }
+    catch (int number)
+    {
+        printf("%d", number);
+        delete tcpSocket;
+    } 
 
-    std::ThreadPool executor(4);
-    executor.commit(add, 2, 1);
-    executor.commit(sub, 2, 1);
+    // std::ThreadPool executor(4);
+    // executor.commit(add, 2, 1);
+    // executor.commit(sub, 2, 1);
 
-    printf("%s", exampleResponse());
+    // printf("%s", exampleResponse());
 }
