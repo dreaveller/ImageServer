@@ -1,7 +1,15 @@
 #include "Action.h"
 #include <stdio.h>
+#include "HTTPEntity.h"
 
-int send_image(int connfd)
+char* exampleResponse()
 {
-    fwrite();
+    char *buf = "example";
+    return buf;
+}
+
+int sendRandomImage(int fd, HTTPResponse hTTPResponse)
+{
+    char buff[4096];
+
 }

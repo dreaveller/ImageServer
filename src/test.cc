@@ -1,7 +1,8 @@
 #include "SocketFactory.h"
 #include "TCP.h"
 #include <stdio.h>
-#include "threadpool.h"
+#include "ThreadPool.h"
+#include "Action.h"
 
 void add(int a, int b)
 {
@@ -34,7 +35,9 @@ int main()
     //     delete tcpSocket;
     // } 
 
-    std::threadpool executor(4);
+    std::ThreadPool executor(4);
     executor.commit(add, 2, 1);
     executor.commit(sub, 2, 1);
+
+    printf("%s", exampleResponse());
 }
