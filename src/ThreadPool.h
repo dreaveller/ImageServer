@@ -39,7 +39,7 @@ namespace std
 
     //线程池,可以提交变参函数或 lambda 表达式的匿名函数执行,可以获取执行返回值
     //不直接支持类成员函数, 支持类静态成员函数或全局函数,Opteron()函数等
-    class threadpool
+    class ThreadPool
     {
         using Task = function<void()>; //定义类型
         vector<thread> _pool;          //线程池
@@ -50,8 +50,8 @@ namespace std
         atomic<int> _idlThrNum{0};     //空闲线程数量
 
     public:
-        inline threadpool(unsigned short size = 4) { addThread(size); }
-        inline ~threadpool()
+        inline ThreadPool(unsigned short size = 4) { addThread(size); }
+        inline ~ThreadPool()
         {
             _run = false;
             _task_cv.notify_all(); // 唤醒所有线程执行
