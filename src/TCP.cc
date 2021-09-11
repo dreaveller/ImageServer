@@ -74,7 +74,7 @@ int TCP::start()
         // printf("recv msg from client: %s\n", buff);
         // close(connfd);
         HTTPResponse hTTPResponse;
-        executor.commit(sendRandomImage, connfd, hTTPResponse);
+        executor.commit(sendRandomImage, connfd, hTTPResponse);  // todo:  using singleton alter static 
         // -------------------------------------------------------------------------------------------------
     }
 }
