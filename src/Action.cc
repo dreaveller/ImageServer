@@ -21,7 +21,7 @@ int sendRandomImage(int connFd, HTTPResponse hTTPResponse)
     // string head = hTTPResponse.deserilize();
     char* head = "HTTP/1.1 200 OK\r\nServer: XHttp\r\nContent-Type: image/jpeg\r\n\r\n";
     send(connFd, head, strlen(head), 0);
-    int fd = open("85116637_p0.jpg", O_RDONLY);
+    int fd = open("../resource/85116637_p0.jpg", O_RDONLY);
     struct stat stat_buf;
     fstat(fd, &stat_buf);
     sendfile(connFd, fd, NULL, stat_buf.st_size);
