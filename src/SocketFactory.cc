@@ -1,5 +1,5 @@
-#include <SocketFactory.h>
-#include <TCP.h>
+#include "SocketFactory.h"
+#include "UDP.h"
 
 TCPConnListener *SocketFactory::newTCPConnListener()
 {
@@ -11,17 +11,17 @@ TCPConnListener *SocketFactory::newTCPConnListener(int port)
     return new TCPConnListener(port);
 }
 
-TCPConn *SocketFactory::newTCPConn(int port)
+TCPConn *SocketFactory::newTCPConn(int port, sockaddr_in &remoteAddr)
 {
-    return new TCPConn(port);
+    return new TCPConn(port, remoteAddr);
 }
 
-UDP *SocketFactory::newUDPServSocket()
-{
-    return SocketFactory::newUDPServSocket();
-}
+// UDP *SocketFactory::newUDPServSocket()
+// {
+//     return SocketFactory::newUDPServSocket();
+// }
 
-UDP *SocketFactory::newUDPServSocket(int port)
-{
-    return new UDP(port);
-}
+// UDP *SocketFactory::newUDPServSocket(int port)
+// {
+//     return new UDP(port);
+// }

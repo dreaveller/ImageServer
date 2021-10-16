@@ -6,6 +6,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "TCPConn.h"
+#include "SocketFactory.h"
+
 TCPConnListener::TCPConnListener()
 {
     TCPConnListener(this->port);
@@ -49,7 +52,7 @@ int TCPConnListener::listen()
     }
 }
 
-int TCPConnListener::accept()
+TCPConn *TCPConnListener::accept()
 {
     printf("waiting a connection...\r\n");
     sockaddr_in remote_addr;
@@ -61,6 +64,9 @@ int TCPConnListener::accept()
         throw 10005;
     }
     printf("accept a connection:%s \r\n", inet_ntoa(remote_addr.sin_addr));
+    return SocketFactory::newTCPConn(connfd, remote_addr);
+
+    // 以下是通信逻辑，职责分离后删除
     char buff[4096];
     int ret = recv(connfd, buff, 4096, 0);
     if (ret < 0)

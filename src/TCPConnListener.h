@@ -1,6 +1,8 @@
 #ifndef _TCPCONNLISTENER_
 #define _TCPCONNLISTENER_
 
+#include "TCPConn.h"
+
 class TCPConnListener
 {
 private:
@@ -12,7 +14,7 @@ public:
     TCPConnListener(int port);
     ~TCPConnListener();
     int listen();
-    int accept();
+    TCPConn * accept();
 };
 
 #endif
