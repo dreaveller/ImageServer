@@ -8,13 +8,12 @@ class TCP
 private:
     int socket = 0;
     int actual_socket = 0;
-    static std::ThreadPool executor(4);
-
+    int port = 8848;
 public:
     TCP();
     TCP(int port);
     int listen();
-    int start();
+    int accept();
     ~TCP();
 };
 

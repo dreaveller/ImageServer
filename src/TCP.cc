@@ -11,7 +11,7 @@
 
 TCP::TCP()
 {
-    TCP(8080);
+    TCP(this->port);
 }
 
 TCP::TCP(int port)
@@ -20,6 +20,7 @@ TCP::TCP(int port)
     {
         throw 10001;
     }
+    this->port = port;
 
     this->socket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (this->socket == -1)
@@ -43,40 +44,36 @@ int TCP::listen()
     if (::listen(this->socket, 10) == -1)
     {
         printf("%s:%d bind() error\r\n", __FILE__, __LINE__);
-        return 10004;
+        throw 10004;
     }
 }
 
-int TCP::start()
+int TCP::accept()
 {
-    while (1)
+    printf("waiting a connection...\r\n");
+    sockaddr_in remote_addr;
+    unsigned int addr_len = sizeof(remote_addr);
+    int connfd;
+    if ((connfd = ::accept(this->socket, (sockaddr *)&remote_addr, &addr_len)) == -1)
     {
-        printf("waiting a connection...\r\n");
-        sockaddr_in remote_addr;
-        unsigned int addr_len = sizeof(remote_addr);
-        int connfd;
-        if ((connfd = ::accept(this->socket, (sockaddr *)&remote_addr, &addr_len)) == -1)
-        {
-            printf("%s:%d accept() error\r\n", __FILE__, __LINE__);
-            throw 10005;
-        }
-        printf("accept a connection:%s \r\n", inet_ntoa(remote_addr.sin_addr));
-        // char buff[4096];
-        // int ret = recv(connfd, buff, 4096, 0);
-        // if (ret < 0)
-        // {
-        //     printf("error\r\n");
-        //     return 0;
-        // }
-        // send(connfd, buff, 4096, 0);
-        // buff[ret] = '\0';
-
-        // printf("recv msg from client: %s\n", buff);
-        // close(connfd);
-        HTTPResponse hTTPResponse;
-        executor.commit(sendRandomImage, connfd, hTTPResponse);  // todo:  using singleton alter static 
-        // -------------------------------------------------------------------------------------------------
+        printf("%s:%d accept() error\r\n", __FILE__, __LINE__);
+        throw 10005;
     }
+    printf("accept a connection:%s \r\n", inet_ntoa(remote_addr.sin_addr));
+    char buff[4096];
+    int ret = recv(connfd, buff, 4096, 0);
+    if (ret < 0)
+    {
+        printf("error\r\n");
+        return 0;
+    }
+    send(connfd, buff, 4096, 0);
+    buff[ret] = '\0';
+
+    printf("recv msg from client: %s\n", buff);
+    close(connfd);
+
+    // todo:  using singleton alter static
 }
 
 TCP::~TCP()

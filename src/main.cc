@@ -27,7 +27,7 @@ int main()
     {
         tcpSocket = SocketFactory::newTCPServSocket(26413);
         tcpSocket->listen();
-        tcpSocket->start();
+        tcpSocket->accept();
     }
     catch (int number)
     {

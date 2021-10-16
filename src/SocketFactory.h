@@ -7,7 +7,7 @@
 class SocketFactory
 {
 private:
-    SocketFactory(/* args */);
+    SocketFactory();
     ~SocketFactory();
 
 public:

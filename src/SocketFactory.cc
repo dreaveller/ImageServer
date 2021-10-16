@@ -3,7 +3,7 @@
 
 TCP *SocketFactory::newTCPServSocket()
 {
-    return SocketFactory::newTCPServSocket(8080);
+    return SocketFactory::newTCPServSocket();
 }
 
 TCP *SocketFactory::newTCPServSocket(int port)
@@ -13,7 +13,7 @@ TCP *SocketFactory::newTCPServSocket(int port)
 
 UDP *SocketFactory::newUDPServSocket()
 {
-    return SocketFactory::newUDPServSocket(8080);
+    return SocketFactory::newUDPServSocket();
 }
 
 UDP *SocketFactory::newUDPServSocket(int port)
