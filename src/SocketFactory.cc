@@ -1,14 +1,19 @@
 #include <SocketFactory.h>
 #include <TCP.h>
 
-TCP *SocketFactory::newTCPServSocket()
+TCPConnListener *SocketFactory::newTCPConnListener()
 {
-    return SocketFactory::newTCPServSocket();
+    return SocketFactory::newTCPConnListener(8848);
 }
 
-TCP *SocketFactory::newTCPServSocket(int port)
+TCPConnListener *SocketFactory::newTCPConnListener(int port)
 {
-    return new TCP(port);
+    return new TCPConnListener(port);
+}
+
+TCPConn *SocketFactory::newTCPConn(int port)
+{
+    return new TCPConn(port);
 }
 
 UDP *SocketFactory::newUDPServSocket()

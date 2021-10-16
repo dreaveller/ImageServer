@@ -1,8 +1,6 @@
 #ifndef _TCP_
 #define _TCP_
 
-#include "ThreadPool.h"
-
 class TCP
 {
 private:

@@ -3,6 +3,8 @@
 
 #include "TCP.h"
 #include "UDP.h"
+#include "TcpConnectionListener.h"
+#include "TCPConn.h"
 
 class SocketFactory
 {
@@ -11,8 +13,9 @@ private:
     ~SocketFactory();
 
 public:
-    static TCP *newTCPServSocket();
-    static TCP *newTCPServSocket(int port);
+    static TCPConnListener *newTCPConnListener();
+    static TCPConnListener *newTCPConnListener(int port);
+    static TCPConn *newTCPConn(int port);
     static UDP *newUDPServSocket();
     static UDP *newUDPServSocket(int port);
 };

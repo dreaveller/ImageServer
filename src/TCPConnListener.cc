@@ -1,18 +1,17 @@
+#include "TCPConnListener.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "TCP.h"
-#include "ThreadPool.h"
 
-TCP::TCP()
+TCPConnListener::TCPConnListener()
 {
-    TCP(this->port);
+    TCPConnListener(this->port);
 }
 
-TCP::TCP(int port)
+TCPConnListener::TCPConnListener(int port)
 {
     if (port > 65535 || port < 0)
     {
@@ -37,7 +36,11 @@ TCP::TCP(int port)
     }
 }
 
-int TCP::listen()
+TCPConnListener::~TCPConnListener()
+{
+}
+
+int TCPConnListener::listen()
 {
     if (::listen(this->socket, 10) == -1)
     {
@@ -46,7 +49,7 @@ int TCP::listen()
     }
 }
 
-int TCP::accept()
+int TCPConnListener::accept()
 {
     printf("waiting a connection...\r\n");
     sockaddr_in remote_addr;
@@ -72,8 +75,4 @@ int TCP::accept()
     close(connfd);
 
     // todo:  using singleton alter static
-}
-
-TCP::~TCP()
-{
 }
