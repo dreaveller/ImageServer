@@ -1,27 +1,9 @@
-/***********************************************************************************************
- *** Threadpool                                                                              ***
- ***********************************************************************************************
- *                                                                                             *
- *                 Project Name : ImageServer                                                  *
- *                                                                                             *
- *                    File Name : acceptor.cc                                                  *
- *                                                                                             *
- *                   Programmer : yunru                                                        *
- *                                                                                             *
- *                   Start Date : Sep 10, 2021                                                 *
- *                                                                                             *
- *                  Last Update : Sep 10, 2021 [yunru]                                         *
- *                                                                                             *
- *---------------------------------------------------------------------------------------------*
- * Functions:                                                                                  *
- *   commit:: commit a task waiting to be execute                                              *
- *   idlCount: get the count of the idel thread                                                *
- *   thrCount: get the count of the thread                                                     *
- *   addThread: add a thread on the threadpool instance                                        *
- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
 #ifndef THREAD_POOL_H
 #define THREAD_POOL_H
+
+/*
+ * thread pool
+ */
 
 #include <vector>
 #include <queue>

@@ -1,22 +1,3 @@
-/***********************************************************************************************
- *** This is a example function defined for learning procedure                               ***
- ***********************************************************************************************
- *                                                                                             *
- *                 Project Name : ImageServer                                                  *
- *                                                                                             *
- *                    File Name : acceptor.cc                                                  *
- *                                                                                             *
- *                   Programmer : yunru                                                        *
- *                                                                                             *
- *                   Start Date : Sep 04, 2021                                                 *
- *                                                                                             *
- *                  Last Update : Sep 04, 2021 [yunru]                                         *
- *                                                                                             *
- *---------------------------------------------------------------------------------------------*
- * Functions:                                                                                  *
- *   return_ifn_error -- process error code                                                    *
- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
 #include <iostream>
 #include <sys/socket.h>
 #include <stdio.h>
