@@ -14,13 +14,3 @@ TCPConn *SocketFactory::newTCPConn(int port, sockaddr_in &remoteAddr)
 {
     return new TCPConn(port, remoteAddr);
 }
-
-// UDP *SocketFactory::newUDPServSocket()
-// {
-//     return SocketFactory::newUDPServSocket();
-// }
-
-// UDP *SocketFactory::newUDPServSocket(int port)
-// {
-//     return new UDP(port);
-// }
