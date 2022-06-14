@@ -6,7 +6,6 @@
 #include <sys/sendfile.h>
 #include <sys/stat.h>
 #include "Action.h"
-#include "HTTPEntity.h"
 
 char* exampleResponse()
 {
@@ -14,7 +13,7 @@ char* exampleResponse()
     return buf;
 }
 
-int sendRandomImage(int connFd, HTTPResponse hTTPResponse)
+int sendRandomImage(int connFd)
 {
     char buff[4096];
     // example

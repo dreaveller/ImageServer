@@ -6,9 +6,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <sys/sendfile.h>
-#include <fstream>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <fstream>
 #include <string>
 
 TCPConn::TCPConn(int socket, sockaddr_in &remoteAddr)
@@ -41,7 +41,7 @@ int TCPConn::recv()
 int TCPConn::send()
 {
     std::string rmsg = "HTTP/1.1 200 OK\r\n";
-    rmsg += "Server: XHttp\r\n";
+    rmsg += "Server: ImageServer\r\n";
     rmsg += "Content-Type: image/jpeg\r\n";
     rmsg += "\r\n";
     ::send(this->socket, rmsg.c_str(), rmsg.size(), 0);

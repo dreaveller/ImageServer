@@ -1,7 +1,6 @@
 #ifndef _SOCKETFACTORY_
 #define _SOCKETFACTORY_
 
-#include "TCP.h"
 #include "UDP.h"
 #include "TCPConnListener.h"
 #include "TCPConn.h"

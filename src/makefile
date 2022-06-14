@@ -1,4 +1,4 @@
-main: SocketFactory.cc TCP.cc test.cc UDP.cc
-	g++ -o main SocketFactory.cc TCP.cc test.cc UDP.cc Action.cc ThreadPool.h HTTPEntity.h -I. -g
+main: SocketFactory.cc main.cc UDP.cc TCPConnListner.cc TCPConn.cc
+	g++ -o main SocketFactory.cc main.cc UDP.cc Action.cc ThreadPool.h TCPConnListner.cc TCPConn.cc -I. -g
 
-object = SocketFactory.o TCP.o test.o UDP.o
+object = SocketFactory.o main.o UDP.o
