@@ -1,9 +1,11 @@
 #include<iostream>
-#include"Dog.h"
+#include<fcntl.h>
+#include<stdio.h>
+
 int main() 
 {
-    std::cout << "1";
-    Dog dog(1);
-    dog.bark();
-    return 1;
+    FILE *f = fopen("../resource/response/normal.txt", "r");
+    std::cout << fileno(f) << std::endl;
+
+    // std::cout << open("../resource/response/normal.txt", O_RDONLY) << std::endl;
 }

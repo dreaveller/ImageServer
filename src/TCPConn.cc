@@ -46,7 +46,7 @@ int TCPConn::send()
     rmsg += "\r\n";
     ::send(this->socket, rmsg.c_str(), rmsg.size(), 0);
 
-    int fd = open("../resource/85116637_p0.jpg", O_RDONLY);
+    int fd = open("../resource/image/85116637_p0.jpg", O_RDONLY);
     struct stat stat_buf;
     fstat(fd, &stat_buf);
     sendfile(this->socket, fd, NULL, stat_buf.st_size);
