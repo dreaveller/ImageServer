@@ -1,0 +1,4 @@
+HTTP/1.1 200 OK
+Server: Image
+Content-Type: image/jpeg
+
